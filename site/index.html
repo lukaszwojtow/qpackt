@@ -13,14 +13,13 @@
 <nav class="bg-gray-800 py-4">
     <div class="container mx-auto flex justify-between items-center">
         <div>
-            <a class="text-white text-lg font-bold" href="index.html">Qpackt</a>
+            <a class="text-white text-lg font-bold" href="/">Qpackt</a>
         </div>
         <div class="hidden md:block" style="margin: 10px">
             <ul class="flex space-x-4">
-                <li><a class="text-white hover:text-gray-300" href="index.html">Home</a></li>
+                <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+                <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
                 <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
-                <li><a class="text-white hover:text-gray-300" href="roadmap.html">Roadmap</a></li>
-                <li><a class="text-white hover:text-gray-300" href="ab-testing.html">A/B testing</a></li>
                 <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
                     code</a></li>
             </ul>
@@ -39,10 +38,9 @@
 
 <div class="hidden md:hidden bg-gray-800 py-4" id="menu">
     <ul class="flex flex-col space-y-2">
-        <li><a class="text-white hover:text-gray-300" href="index.html">Home</a></li>
+        <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+        <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
         <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
-        <li><a class="text-white hover:text-gray-300" href="roadmap.html">Roadmap</a></li>
-        <li><a class="text-white hover:text-gray-300" href="ab-testing.html">A/B testing</a></li>
         <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
             code</a></li>
     </ul>
@@ -58,46 +56,22 @@
 </script>
 <div class="max-w-2xl mx-auto" style="margin-bottom: 30px">
     <div style="margin: 30px"></div>
-    <h2 class="text-2xl font-bold mb-4">Qpackt - Web Deployment and Monitoring</h2>
-    Qpackt is a web server designed to make your life easier:
+    <h2 class="text-2xl font-bold mb-4">Qpackt - Modern Web Server</h2>
+
+    Qpackt is a webserver for 21st century:
     <div class="mb-6">
-        <p class="font-bold">1. Serve Multiple Versions of Your Website:</p>
         <ul class="list-disc pl-6">
-            <li>Visitors are assigned a version on the first request.</li>
-            <li>Consecutive requests are served from the selected version.</li>
-            <li>This enables:</li>
-            <ul class="list-disc pl-6">
-                <li>a) A/B testing</li>
-                <li>b) Loading multiple versions based on specified URL parameters</li>
-                <li>c) Deploying new versions while preserving old sessions</li>
-            </ul>
+            <li>Fast and reliable (built in Rust)</li>
+            <li>Non-invasive analytics (http-based and <a class="underline" href="events.html">custom events</a>)</li>
+            <li><a class="underline" href="multi-version.html">A/B testing</a></li>
+            <li>SSL certificate management</li>
+            <li>Open-source (<a class="underline" href="https://github.com/qpackt/qpackt" target="_blank">GitHub</a>)
+            </li>
+            <li>Web-based admin's console</li>
+            <li><a class="underline" href="features.html">... and more</a></li>
         </ul>
     </div>
-
-    <div class="mb-6">
-        <p class="font-bold">2. Basic, GDPR-Compliant Analytics:</p>
-        <p>Includes metrics like bounce rate and visit count, collected without cookies.</p>
-    </div>
-
-    <div class="mb-6">
-        <p class="font-bold">3. Auto-Fetch SSL Certificates:</p>
-        <p>Automatically fetch (and renew) SSL certificates from LetsEncrypt.</p>
-    </div>
-
-    <div class="mb-6">
-        <p class="font-bold">4. GUI Configuration:</p>
-        <p>Provides a graphical user interface for ease of use.</p>
-    </div>
-
-    <div class="mb-6">
-        <p class="font-bold">5. Open Source and Free:</p>
-        <p>Fully open source and free to use. <a class="text-blue-500" href="https://github.com/qpackt/qpackt"
-                                                 target="_blank">Source code</a>.</p>
-    </div>
-
-    <p>Qpackt is not yet production ready (see <a class="text-blue-500" href="roadmap.html">roadmap</a>) but is able to
-        serve itself (if you can read this).</p>
-    <p>If you're interested about future development, follow me on X (<a class="text-blue-500"
+    <p>If you're interested about future development, follow us on X (<a class="text-blue-500"
                                                                          href="https://twitter.com/QPackt">https://twitter.com/QPackt</a>)
     </p>
     <p>For installation instructions follow <a class="text-blue-500"
@@ -110,13 +84,14 @@
     let time = 0;
 
     function myEventFunction() {
-        if (time < 60) {
+        if (time < 21) {
             sendEvent(`TIME_ON_PAGE_${time}`, {time: time}, 0)
             setTimeout(() => myEventFunction(), 1000)
             time++
         }
     }
 
+    sendEvent(`JS_ENABLED`, {}, 0)
     myEventFunction()
 
 </script>

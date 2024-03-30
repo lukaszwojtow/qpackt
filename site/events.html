@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Qpackt :: Ramblings About Software Engineering</title>
     <link href="tailwind.min.css" rel="stylesheet">
+    <title>Qpackt :: Collecting custom events from visitors</title>
 </head>
-
 <body class="bg-gray-100">
 <script src="/qpackt/event/send_event.js"></script>
 <nav class="bg-gray-800 py-4">
@@ -54,47 +52,52 @@
         menu.classList.toggle('hidden');
     });
 </script>
+
 <div class="max-w-2xl mx-auto" style="margin-bottom: 30px">
     <div style="margin: 30px"></div>
+    <p class="mb-4">
+        Sometimes analyzing ordinary HTTP requests is not enough. To better understand your visitors' behaviour, you
+        can use custom events sent from their browsers (via JavaScript).</p>
+    <p class="mb-4">
+        Qpackt exposes an endpoint where an event can be posted. Each event is saved together with its payload and some
+        more stats.
+        Sending an event is as simple as calling the
+        <i style="font-family: monospace; background: #d0d0d0">sendEvent</i> function with some
+        parameters:</p>
+    <code class="text-sm text-gray-600">
+        &lt;script src="/qpackt/event/send_event.js"&gt;&lt;/script&gt;<br>
+        &lt;script lang="js"&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;sendEvent(`EVENT_NAME_${some_variable}`, {variable: {x: 0}}, 0)<br>
+        &lt;/script&gt;<br>
+    </code>
+    <p class="mb-4"></p>
+    <p class="mb-4">
+        You need to provide three parameters to the <i style="font-family: monospace; background: #d0d0d0">sendEvent</i>
+        function:</p>
+    <ul class="list-disc pl-6">
+        <li>Event name - any string that explains the meaning. Can be created dynamically by string format.</li>
+        <li>Custom payload - any JSON will do.</li>
+        <li>Visitor ID - use 0 to get Qpackt to calculate it with the same algorithm as for other requests. You can
+            change it to
+            any other value (for example, if you get the visitor's permission, you can use a value from
+            localStorage).
+        </li>
+    </ul>
+    <p class="mb-4"></p>
+    <p class="mb-4">
+        Collected events will be visible in Analytics page in Qpackt's admin console. You will see a breakdown per
+        version, with option to download events as CSV. The CSV file will contain:</p>
+    <ul class="list-disc pl-6">
+        <li>ID - The event ID.</li>
+        <li>Time - Event's time.</li>
+        <li>Version - Web page version at which the event happened.</li>
+        <li>Visitor - Visitor ID (calculated by Qpackt or assigned by your code).</li>
+        <li>Params - Http url params</li>
+        <li>Path - Url path (without params)</li>
+        <li>Payload - Event payload as JSON</li>
+    </ul>
 
-    <div class="max-w-lg mx-auto mt-8">
-        <a href="1-percent-better-every-day.html"><h2 class="text-3xl font-bold mb-4">1 % better every day</h2></a>
-        <p class="text-gray-800 leading-relaxed">
-            Don't shoot for the stars to get to the moon. Instead, fix this pothole right in front of you.
-        </p>
-        <a class="underline" href="1-percent-better-every-day.html">Continued...</a>
-    </div>
-
-    <div class="max-w-lg mx-auto mt-8">
-        <a href="mutation-testing-in-rust.html"><h2 class="text-3xl font-bold mb-4">Mutation testing in Rust</h2></a>
-        <p class="text-gray-800 leading-relaxed">
-            Improving your tests one mutant at a time (and fighting spurious line coverage).
-        </p>
-        <a class="underline" href="mutation-testing-in-rust.html">Continued...</a>
-    </div>
-
-    <div class="max-w-lg mx-auto mt-8">
-        <a href="testing-qpackt-with-cargo-mutants.html"><h2 class="text-3xl font-bold mb-4">Using mutants to find weak
-            spots in Qpackt. Part #1</h2></a>
-        <p class="text-gray-800 leading-relaxed">
-            It's too late for TDD, what now?
-        </p>
-        <a class="underline" href="testing-qpackt-with-cargo-mutants.html">Continued...</a>
-    </div>
 </div>
+
 </body>
-<script lang="js">
-    let time = 0;
-
-    function myEventFunction() {
-        if (time < 21) {
-            sendEvent(`TIME_ON_PAGE_${time}`, {time: time}, 0)
-            setTimeout(() => myEventFunction(), 1000)
-            time++
-        }
-    }
-
-    myEventFunction()
-
-</script>
 </html>

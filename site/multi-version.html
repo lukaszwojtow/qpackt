@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Qpackt :: A/B Testing</title>
+    <title>Qpackt :: Running multiple versions of a website</title>
     <link href="tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -13,14 +13,13 @@
 <nav class="bg-gray-800 py-4">
     <div class="container mx-auto flex justify-between items-center">
         <div>
-            <a class="text-white text-lg font-bold" href="index.html">Qpackt</a>
+            <a class="text-white text-lg font-bold" href="/">Qpackt</a>
         </div>
         <div class="hidden md:block" style="margin: 10px">
             <ul class="flex space-x-4">
-                <li><a class="text-white hover:text-gray-300" href="index.html">Home</a></li>
+                <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+                <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
                 <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
-                <li><a class="text-white hover:text-gray-300" href="roadmap.html">Roadmap</a></li>
-                <li><a class="text-white hover:text-gray-300" href="ab-testing.html">A/B testing</a></li>
                 <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
                     code</a></li>
             </ul>
@@ -39,10 +38,9 @@
 
 <div class="hidden md:hidden bg-gray-800 py-4" id="menu">
     <ul class="flex flex-col space-y-2">
-        <li><a class="text-white hover:text-gray-300" href="index.html">Home</a></li>
+        <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+        <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
         <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
-        <li><a class="text-white hover:text-gray-300" href="roadmap.html">Roadmap</a></li>
-        <li><a class="text-white hover:text-gray-300" href="ab-testing.html">A/B testing</a></li>
         <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
             code</a></li>
     </ul>
@@ -64,20 +62,24 @@
     <p class="mb-4">Serving multiple versions of the same site can be useful for various reasons:</p>
 
     <ul class="list-disc pl-6 mb-6">
-        <li><strong>A/B testing:</strong> Split your visits into two different versions and compare their engagement.
+        <li><strong>A/B testing:</strong> Split incoming traffic to two different versions and compare their
+            engagement.
             For example, some people prefer reading longer text while others prefer viewing images. Some like a light
             and minimalistic look, while others prefer dark mode.
         </li>
         <li><strong>Splitting traffic by source:</strong> When you share a link to your website, you can add a URL
             parameter like "www.site.com/?source=ad" or "www.site.com/?source=forum". This allows you to compare user
-            engagement and conversions based on the referral source.
+            engagement and conversions based on the referral source. This can also be used to test a website before
+            exposing it
+            to the whole world. Just use something like "www.site.com/?test" and visit this link. Nobody will see this
+            version (if you don't publish this link) but you can test it in production environment.
         </li>
         <li><strong>Preventing broken link errors:</strong> When you want to upload a new version of your site, some
             visitors may still have the old version open in their browsers. You don't want to lose them when they click
             on a link that no longer exists in the new version. Instead, you can smoothly transition new users to the
             updated version while still serving the old version to current users. Once everyone has switched over to the
             new version, you can safely delete the old one. This is especially important for Single Page Applications
-            (such as Angular, Vue, etc.) where page elements are often loaded lazily, as a broken link can result in an
+            (such as Angular, Vue, etc.) where page elements are often loaded lazily, and a broken link can result in an
             unpleasant error message for the user.
         </li>
     </ul>
@@ -107,7 +109,7 @@
 
     <h2 class="text-xl font-bold mb-4">Rolling a new version</h2>
 
-    <p class="mb-4">Getting users off the old version is done by assigning 0 weight to the old version, and any higher
+    <p class="mb-4">Getting users off the old version is done by assigning 0 weight to the old version and any higher
         number to the new one.</p>
 
     <p class="mb-4">
@@ -135,7 +137,7 @@
     let time = 0;
 
     function myEventFunction() {
-        if (time < 60) {
+        if (time < 21) {
             sendEvent(`TIME_ON_PAGE_${time}`, {time: time}, 0)
             setTimeout(() => myEventFunction(), 1000)
             time++

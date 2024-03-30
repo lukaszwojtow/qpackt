@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="tailwind.min.css" rel="stylesheet">
+    <title>Qpackt :: Features</title>
+</head>
+<body class="bg-gray-100">
+<script src="/qpackt/event/send_event.js"></script>
+<nav class="bg-gray-800 py-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div>
+            <a class="text-white text-lg font-bold" href="/">Qpackt</a>
+        </div>
+        <div class="hidden md:block" style="margin: 10px">
+            <ul class="flex space-x-4">
+                <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+                <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
+                <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
+                <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
+                    code</a></li>
+            </ul>
+        </div>
+        <div class="md:hidden">
+            <button class="text-white focus:outline-none" id="menu-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"
+                          stroke-width="2"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<div class="hidden md:hidden bg-gray-800 py-4" id="menu">
+    <ul class="flex flex-col space-y-2">
+        <li><a class="text-white hover:text-gray-300" href="/">Home</a></li>
+        <li><a class="text-white hover:text-gray-300" href="features.html">Features</a></li>
+        <li><a class="text-white hover:text-gray-300" href="blog.html">Blog</a></li>
+        <li><a class="text-white hover:text-gray-300" href="https://github.com/qpackt/qpackt" target="_blank">Source
+            code</a></li>
+    </ul>
+</div>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+
+    menuToggle.addEventListener('click', function () {
+        menu.classList.toggle('hidden');
+    });
+</script>
+<div class="max-w-2xl mx-auto" style="margin-bottom: 30px">
+    <div style="margin: 30px"></div>
+    <h2 class="text-2xl font-bold mb-4">Qpackt's features</h2>
+
+
+    <ul class="list-disc pl-6">
+        <li><a class="underline" href="#basic_stats">Collect basic stats without cookies</a></li>
+        <li><a class="underline" href="#custom_events">Collect custom events from browser</a></li>
+        <li><a class="underline" href="#ab_testing">A/B testing</a></li>
+        <li><a class="underline" href="#new_version">Gently roll new website without breaking existing sessions</a></li>
+        <li><a class="underline" href="#traffic_split">Split traffic based on url parameter</a></li>
+        <li><a class="underline" href="#reverse_proxy">Reverse proxy</a></li>
+        <li><a class="underline" href="#fetch_ssl">Auto fetch SSL certificate</a></li>
+        <li><a class="underline" href="#gui_configuration">GUI configuration</a></li>
+        <li><a class="underline" href="#planned">Potential features for the future</a></li>
+    </ul>
+    <div style="margin: 30px"></div>
+    <div class="text-2xl" id="basic_stats">Collecting basic stats from HTTP requests</div>
+    <p class="mb-4">
+        Qpackt collects simple stats from HTTP requests. Each request is matched to a visitor using their ip and
+        user-agent fingerprinting.
+        You can see bounce rate, average requests per visit, session duration, etc. This is done without tracking
+        cookies.
+    </p>
+    <div class="text-2xl" id="custom_events">Collecting custom events from browsers</div>
+    <p class="mb-4">
+        To better monitor visitors you can send events from JavaScript. Events can have custom payload and represent
+        any action you can think of: scrolling to the bottom, staying on the page longer than X, clicking a button, etc.
+        This is also done without tracking cookies or local storage.
+        You can see summary of collected events (and download full list) in admin's console.
+        <a class="underline" href="events.html">More about events</a>
+    </p>
+    <div class="text-2xl" id="ab_testing">A/B testing with multiple site versions</div>
+    <p class="mb-4">
+        You can deploy multiple versions of your website and then compare engagement between them.
+        <a class="underline" href="multi-version.html">More about serving multiple versions</a>
+    </p>
+    <div class="text-2xl" id="new_version">Rolling a new version of your website</div>
+    <p class="mb-4">
+        To prevent missing links (or missing parts of an SPA website), you can gradually roll new sessions to
+        the new version and keep existing sessions on the old one. After a day/week, you can safely remove the old
+        version.
+        <a class="underline" href="multi-version.html">More about serving multiple versions</a>
+    </p>
+    <div class="text-2xl" id="traffic_split">Splitting traffic based on a URL param</div>
+    <p class="mb-4">
+        When you control the link to your website (like paid ads) you can add a special url parameter to each link.
+        Then you can compare engagement based on the source link.
+        <a class="underline" href="multi-version.html">More about serving multiple versions</a>
+    </p>
+    <div class="text-2xl" id="reverse_proxy">Reverse proxy for backend application</div>
+    <p class="mb-4">
+        HTTP server wouldn't be fully functional without a reverse proxy. Qpackt allows you to proxy traffic to another
+        app.
+    </p>
+    <div class="text-2xl" id="fetch_ssl">Automatically fetching SSL certificate from Let's Encrypt</div>
+    <p class="mb-4">
+        Qpackt can automatically fetch an SSL certificate from letsencrypt.org. All you need to do is to enable SSL
+        proxy in the config file.
+    </p>
+    <div class="text-2xl" id="gui_configuration">GUI configuration</div>
+    <p class="mb-4">
+        Most of the stuff above is configured via GUI. Only the initial setup/installation is via a console.
+    </p>
+    <div class="text-2xl" id="planned">Planned futures</div>
+    <p class="mb-4">
+        Below are some ideas that we think would be cool. Keep in mind that the list below is really haphazard and
+        some duplicates may happen. If you think anything below is worth implementing, let me know by creating an issue
+        (and giving a star) on <a class="underline" href="https://github.com/qpackt/qpackt">GitHub</a>
+    <ul class="list-disc pl-6">
+        <li>Remove visits without JS installed</li>
+        Create special function (served by Qpackt) that is called to "validate" a visit. Visits that
+        are not validated within a few seconds would be removed. This prevents counting visits from bots and such.
+        <li>Conversion endpoint</li>
+        Define a special endpoint to track conversion. Add some stats to it, allow for numeric payload, then show
+        some analytics per version (like average and such).
+        <li>Measure time on url</li>
+        This could in two variants: including search params and just the url. Define a function that will be used to
+        measure time spent
+        on a given page. Then show stats how many percent of visits got there and show histogram of visits' duration.
+        <li>Define and endpoint to remove some other event</li>
+        This could be used to track that something didn't happen (like visitor dropped at checkout).
+        <li>Collect referrer headers</li>
+        Simply collect referrer headers and show stats per referrer.
+        <li>Build docker image</li>
+        Place docker image in docker hub for easier deployment.
+        <li>Initial config via GUI</li>
+        Instead of running as command line, use web for initial config.
+        <li>Refresh certificate on demand</li>
+        Allow for a button (in admin's console) to refresh certificate.
+        <li>Handle not found</li>
+        Serve either 404.html or index.html when requested file isn't found. This would also fix problems with
+        refresh on SPA.
+        <li>Transfer limits</li>
+        Limit transferred bytes per IP address per month. This is to prevent racking up a large bill on some providers.
+        <li>Request per second limits</li>
+        Again, a little thing that can be done to prevent simple DOS attacks.
+        <li>Collect browser errors</li>
+        Especially for SPA. Possibly with some alerts for the admin.
+        <li>Support websockets</li>
+        Current implementation is mainly for single request/response scenario. Websockets require different approach.
+        <li>Split traffic by platform</li>
+        For example, send mobile users to different version than desktop.
+        <li>Split traffic by location</li>
+        For example, users from one country will get a different version.
+        <li>Implement health check endpoints</li>
+        Passive endpoints reporting server's health to a third party.
+        <li>Active health checks</li>
+        Monitoring health of backend applications and reporting everything in one place.
+        <li>Response monitoring</li>
+        Monitor 5xx and 4xx responses from reverse proxy.
+        <li>Docker / Podman support</li>
+        Allow running an image as backend application (and do reverse proxy there).
+        <li>Monitor backend app response times</li>
+        Monitor usual response times (per endpoint) and alert when becoming unusually high.
+        <li>Monitor resources</li>
+        Monitor stuff like cpu/memory/disk with some alerts.
+        <li>Deploy web from git</li>
+        Observe some defined branch, deploy automatically that branch, redirect traffic to new version.
+        <li>Version notes</li>
+        Allow attaching textual notes to versions to help manage their meaning.
+        <li>Record and replay backend app request</li>
+        Mainly for debugging.
+        <li>View own logs and change log level</li>
+        For convenience mainly.
+        <li>Scan website for broken links</li>
+        Scan for broken links at upload.
+        <li>Read-only access to stats/analytics</li>
+        Some kind of permission levels where viewing stats doesn't require admin's password.
+        <li>Admin's console for mobile</li>
+        More responsive design to view admin's console on mobiles.
+        <li>APT/YUM package</li>
+        Build and distribute apt/yum package for ease of installation/update.
+        <li>Get into distributions</li>
+        Get apt/yum into distributions (Mint, Ubuntu, Fedora, Redhat, etc...)
+        <li>Use client/server database</li>
+        For performance mainly.
+        <li>Handle restarts</li>
+        Implement nginx style to handle restarts without dropping connections.
+        <li>Display some friendly info if reverse proxy doesn't work</li>
+        Mainly for visitors so they know to try again soon. Possibly with alerting for admins.
+        <li>Switch for SPA analysis</li>
+        Some kind of switch to stop analysing single requests and analyse calls to special endpoint with posted data
+        about router route, visitor and such.
+        <li>Kubernetes friendly</li>
+        Share all state between pods (probably via database) so that kubernetes can do a rolling update.
+        <li>Http calls filter</li>
+        Remove certain calls (with regex) from analysis (for example favicon.ico).
+        <li>Alert when too many 404</li>
+        Count and alert when too many file requests returns with 'NOT FOUND'.
+        <li>Refresh SSL cert during normal operations</li>
+        At the moment a cert is only checked for expiration at startup. Do this all the time.
+        <li>Allow changing versions' names</li>
+        To make it a bit more descriptive.
+        <li>Limit response speed per version</li>
+        Could be used for testing.
+        <li>Recognize mobile / wide screen visits</li>
+        And shows stats per platform per version. This could be useful to recognise problems when visits from one
+        platform are always shorter than others.
+        <li>Most common exit page</li>
+        Collect stats about most common exit pages.
+        <li>Collect resolution stats</li>
+        To better optimize the website.
+        <li>Allow WebAsm apps</li>
+        Allow to upload compiled application in the form of webassembly file and direct requests there (kind of like
+        reverse proxy).
+        App would be executed in the qpackt context.
+        <li>Easier integration with Fail2Ban</li>
+        For safety / dos protection etc...
+        <li>Delete stats older than X</li>
+        To save space as old stats may not be relevant anymore.
+        <li>Allow version override</li>
+        New version but keep old stats. Can be useful for fixing typos and small errors. While uploading pick which
+        versions should be overridden with the new one.
+        <li>Collect search engines phrases</li>
+        Collect phrases from various search engines to know how the site was found.
+        <li>One panel for multiple websites</li>
+        To ease administration.
+    </ul>
+
+
+</div>
+</body>
+<script lang="js">
+    let time = 0;
+
+    function myEventFunction() {
+        if (time < 21) {
+            sendEvent(`TIME_ON_PAGE_${time}`, {time: time}, 0)
+            setTimeout(() => myEventFunction(), 1000)
+            time++
+        }
+    }
+
+    myEventFunction()
+
+</script>
+</html>
+

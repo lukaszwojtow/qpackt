@@ -6,6 +6,7 @@ Qpackt is a web server that makes life a bit easier:
 
 * Ability to serve multiple versions of your website (why you need this: https://qpackt.com/ab-testing.html)
 * Basic, GDPR-compliant analytics
+* Collecting and analyzing custom events from the browser
 * Auto fetch and renew SSL certificate
 * GUI configuration
 
