@@ -1,17 +1,19 @@
+use std::net::{Ipv4Addr, SocketAddrV4};
+use std::path::{Path, PathBuf};
+use std::sync::Arc;
+
+use actix_files::Files;
+use actix_web::{App, HttpServer};
+use actix_web::dev::{Server, ServerHandle};
+use log::{debug, error, info, warn};
+use rand::{Rng, thread_rng};
+use tokio::sync::RwLock;
+use url::Url;
+
 use crate::constants::VERSIONS_SUBDIRECTORY;
 use crate::dao::version::{Version, VersionName};
 use crate::error::{QpacktError, Result};
 use crate::manager::strategy::Strategy;
-use actix_files::Files;
-use actix_web::dev::{Server, ServerHandle};
-use actix_web::{App, HttpServer};
-use log::{debug, error, info, warn};
-use rand::{thread_rng, Rng};
-use std::net::{Ipv4Addr, SocketAddrV4};
-use std::path::{Path, PathBuf};
-use std::sync::Arc;
-use tokio::sync::RwLock;
-use url::Url;
 
 /// All servers for versions will be started on localhost:port where starting port is the value below.
 const START_PORT: u16 = 10_000;
@@ -52,7 +54,7 @@ impl Versions {
         // Add up all weights.
         let sum_weights = versions.iter().map(|v| if let Strategy::Weight(w) = v.version.strategy { w as i32 } else { 0 }).sum::<i32>();
         // Pick some version proportionally.
-        let mut cut = thread_rng().gen_range(0..sum_weights + 1);
+        let mut cut = thread_rng().gen_range(1..=sum_weights);
         for v in versions.iter() {
             if let Strategy::Weight(w) = v.version.strategy {
                 cut -= w as i32;
